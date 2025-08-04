@@ -1,5 +1,6 @@
 import pandas as pd
 import re
+from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
 
 from access_url import access_url
@@ -29,6 +30,11 @@ def scrape(url):
         data["企業URL"] = soup.find("a", class_="company-link").get_text()
     except:
         data["企業URL"] = ""
+
+    data["URL"] = url
+
+    now = datetime.now()
+    data["取得日時"] = now.strftime("%Y/%m/%d/%H:%M")
 
     print(data)
     return data
